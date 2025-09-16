@@ -80,3 +80,33 @@ substreams run -e bsc.streamingfast.io:443 substreams.yaml map_events --start-bl
 ```bash
 substreams registry login
 substreams registry publish
+
+## 输出
+```json
+{
+  "@module": "map_events",
+  "@block": 61346955,
+  "@type": "io.blockchain.v1.dex.trade.TradeEvents",
+  "@data": {
+    "events": [
+      {
+        "transaction": {
+          "index": 3,
+          "signature": "0x02e2c76c1e8a2fa5a698b147e401c2a8d86921c9df0598e833a62ae13eed10ec"
+        },
+        "dApp": {
+          "programAddress": "0xd857e4a8fe599ed936157076674b2756d9df6fe8",
+          "chain": "CHAIN_BSC"
+        },
+        "trade": {
+          "userAAccountOwnerAddress": "0x9999b0cdd35d7f3b281ba02efc0d228486940515",
+          "userBAccountOwnerAddress": "0x9999b0cdd35d7f3b281ba02efc0d228486940515",
+          "userAAmount": "-14144637850329025817",
+          "userBAmount": "745598032205490270826",
+          "wasOriginalDirection": true,
+          "poolAddress": "0xd857e4a8fe599ed936157076674b2756d9df6fe8"
+        }
+      }
+    ]
+  }
+}

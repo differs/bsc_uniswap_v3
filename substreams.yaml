@@ -1,0 +1,39 @@
+specVersion: v0.1.0
+package:
+  name: bscuniswapv3
+  version: v0.1.0
+  url: https://github.com/your-org/bscuniswapv3
+  description: "Substreams package for parsing Uniswap V3 Swap events on BSC for pool 0xd857e4a8fe599ed936157076674b2756d9df6fe8, outputting io.blockchain.v1.dex.trade.TradeEvents"
+
+imports:
+    ethcommon: https://spkg.io/streamingfast/ethereum-common-v0.3.0.spkg
+
+protobuf:
+  files:
+    - common.proto
+    - dex_trade_event.proto
+  importPaths:
+    - ./proto
+  excludePaths:
+    - sf/substreams
+    - google
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ./target/wasm32-unknown-unknown/release/substreams.wasm
+
+modules:
+
+  - name: map_events
+    kind: map
+    initialBlock: 0
+    blockFilter:
+      module: ethcommon:index_events
+      query:
+        string: evt_addr:0xd857e4a8fe599ed936157076674b2756d9df6fe8
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:io.blockchain.v1.dex.trade.TradeEvents
+network: bnb
